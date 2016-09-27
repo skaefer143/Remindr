@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:text="Add A Habit:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addHabitText"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:padding="@dimen/activity_horizontal_margin" />
+
+    <TextView
+        android:text="Name:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameText"
+        android:textSize="30sp"
+        android:textStyle="normal|bold" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name Here"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:textStyle="normal|italic"
+        android:textColor="@android:color/darker_gray" />
+</LinearLayout>
