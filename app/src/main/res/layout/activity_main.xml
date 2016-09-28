@@ -26,11 +26,12 @@
         android:layout_height="470dp" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/addHabitFAB"
         android:layout_width="52dp"
         android:layout_height="49dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        app:srcCompat="@android:drawable/ic_menu_add"
+        android:scaleType="center" />
 
 </android.support.design.widget.CoordinatorLayout>
