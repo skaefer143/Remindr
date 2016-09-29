@@ -9,15 +9,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String FILENAME = "file.sav";
-    private ArrayList<Habit> habitList = new ArrayList<Habit>();
+    private HabitList habitList = new HabitList();
     private ListView habitListView;
+    private ArrayAdapter<Habit> adapter;
+    private HabitListController habitListController = new HabitListController();
 
 
 
@@ -41,6 +43,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(addHabitIntent);
             }
         });
+    }
+
+
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+        super.onStart();
+        //Sets adapter
+        adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, habitListController.getHabitList());
+        habitListView.setAdapter(adapter);
     }
 
     @Override
