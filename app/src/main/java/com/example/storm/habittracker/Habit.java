@@ -1,7 +1,10 @@
 package com.example.storm.habittracker;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Storm on 2016-09-27.
@@ -17,11 +20,19 @@ public class Habit {
     private int perDayCompletions = 0;
     private boolean completedToday = false;
     private ArrayList<HabitCompletion> pastCompletions = new ArrayList<HabitCompletion>();
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
 
-
-    Habit (){
-
+    Habit(String nameText, String dateText){
+        this.habitName = nameText;
+        try {
+            this.habitDate = dateFormat.parse(dateText);
+        } catch (ParseException pe) {
+            System.out.println(habitDate);
+            pe.printStackTrace();
+            //this exception should never happen, and if it does it's because we didn't
+            //scrub data hard enough in addHabitActivity
+        }
     }
 
 }

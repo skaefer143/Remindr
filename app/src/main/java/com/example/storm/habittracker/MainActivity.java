@@ -37,11 +37,12 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         habitListController = new HabitListController(getApplicationContext());
 
-        habitListView = (ListView) findViewById(R.id.habitListView);
+
         //Sets adapter
         adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, habitListController.getHabitList().getArrayList());
+        habitListView = (ListView) findViewById(R.id.habitListView);
         habitListView.setAdapter(adapter);
-        habitListController.setAdapter(adapter);
+        habitListController.setAdapter(adapter); //so we can notify of changes, which makes the list update
 
         //add a habit button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.addHabitFAB);
@@ -51,49 +52,48 @@ public class MainActivity extends AppCompatActivity {
                 //call activity launcher, launches to Habit creator activity
 
                 Intent addHabitIntent = new Intent(MainActivity.this, addHabitActivity.class);
-                addHabitIntent.putExtra("Controller", habitListController); //doesn't currently work...
                 startActivity(addHabitIntent);
             }
         });
 
 
         //Clicking on a habitList element should launch to HabitViewerActivity
-    habitListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view,
-        int position, long id) {
-            Toast.makeText(getApplicationContext(),
-                    "Click ListItem Number " + position, Toast.LENGTH_LONG)
-                    .show();
-        }
-    });
+        habitListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+            int position, long id) {
+                Toast.makeText(getApplicationContext(),
+                        "Click ListItem Number " + position, Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
 
-        //delete the habit
-    habitListView.setOnItemLongClickListener(new OnItemLongClickListener() {
-        @Override
-        public boolean onItemLongClick(AdapterView<?> adapterView, View view,
-        int position, long id) {
-            AlertDialog.Builder ADB = new AlertDialog.Builder(MainActivity.this);
-            final ArrayList<Habit> list = habitListController.getHabitList().getArrayList();
-            ADB.setMessage("Delete " + list.get(position).toString() + "?");
-            ADB.setCancelable(true);
-            final int finalPosition = position;
-            ADB.setPositiveButton("Delete", new DialogInterface.OnClickListener(){
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Habit habit = list.get(finalPosition);
-                    habitListController.removeHabit(habit);
-                }
-            });
-            ADB.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                }
-            });
-            ADB.show();
-            return false;
-        }
-    });
+            //delete the habit
+        habitListView.setOnItemLongClickListener(new OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view,
+            int position, long id) {
+                AlertDialog.Builder ADB = new AlertDialog.Builder(MainActivity.this);
+                final ArrayList<Habit> list = habitListController.getHabitList().getArrayList();
+                ADB.setMessage("Delete " + list.get(position).toString() + "?");
+                ADB.setCancelable(true);
+                final int finalPosition = position;
+                ADB.setPositiveButton("Delete", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Habit habit = list.get(finalPosition);
+                        habitListController.removeHabit(habit);
+                    }
+                });
+                ADB.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                ADB.show();
+                return false;
+            }
+        });
     }
 
 
@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         // TODO Auto-generated method stub
         super.onStart();
+        adapter.notifyDataSetChanged();
 
     }
 

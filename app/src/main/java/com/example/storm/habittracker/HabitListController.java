@@ -52,8 +52,8 @@ public class HabitListController implements Serializable{
 
             Gson gson = new Gson();
 
-            //converting ArrayList into Gson ?
-            Type listType = new TypeToken<ArrayList<Habit>>(){}.getType();
+            //getting habitList type, to pass into GSON
+            Type listType = new TypeToken<HabitList>(){}.getType();
 
             habitList = gson.fromJson(in, listType);
 
@@ -92,7 +92,7 @@ public class HabitListController implements Serializable{
 
     public void addHabit(Habit habit) {
         getHabitList().addHabit(habit);
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
     }
 
     public void removeHabit(Habit habit) {
