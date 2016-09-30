@@ -22,4 +22,11 @@ public class HabitList {
     public void removeHabit(Habit habit){
         habitList.remove(habit);
     }
+
+    public ArrayList<Habit> getArrayList(){
+        //gets actual ArrayList
+        return habitList;
+    }
+
+
 }

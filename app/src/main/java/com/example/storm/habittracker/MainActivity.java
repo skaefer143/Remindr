@@ -1,5 +1,6 @@
 package com.example.storm.habittracker;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,17 +12,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private HabitList habitList = new HabitList();
     private ListView habitListView;
     private ArrayAdapter<Habit> adapter;
-    private HabitListController habitListController = new HabitListController();
-
-
+    private HabitListController habitListController = new HabitListController(this);
 
 
     @Override
@@ -51,9 +50,22 @@ public class MainActivity extends AppCompatActivity {
         // TODO Auto-generated method stub
         super.onStart();
         //Sets adapter
-        adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, habitListController.getHabitList());
+        adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, habitListController.getHabitList().getArrayList());
         habitListView.setAdapter(adapter);
+        habitListController.setAdapter(adapter);
     }
+
+    /* Clicking on a habitList element should launch to HabitViewerActivity
+    habitListView.setOnItemClickListener(new OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view,
+        int position, long id) {
+            Toast.makeText(getApplicationContext(),
+                    "Click ListItem Number " + position, Toast.LENGTH_LONG)
+                    .show();
+        }
+    });*/
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

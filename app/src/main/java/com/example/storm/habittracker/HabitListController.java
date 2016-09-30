@@ -1,6 +1,7 @@
 package com.example.storm.habittracker;
 
 import android.content.Context;
+import android.widget.ArrayAdapter;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -25,6 +26,7 @@ public class HabitListController {
 
     private static final String FILENAME = "file.sav";
     private static HabitList habitList = null;
+    private  ArrayAdapter<Habit> adapter;
     private Context context;
 
     public HabitListController(Context context){
@@ -36,7 +38,6 @@ public class HabitListController {
 
     public HabitList getHabitList() {
         habitList = loadFromFile();
-
         return habitList;
     }
 
@@ -90,6 +91,15 @@ public class HabitListController {
 
     public void addHabit(Habit habit) {
         getHabitList().addHabit(habit);
+        adapter.notifyDataSetChanged();
     }
 
+    public void removeHabit(Habit habit) {
+        getHabitList().removeHabit(habit);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void setAdapter(ArrayAdapter<Habit> adapter) {
+        this.adapter = adapter;
+    }
 }
