@@ -1,19 +1,18 @@
 package com.example.storm.habittracker;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -22,6 +21,8 @@ public class addHabitActivity extends AppCompatActivity {
     //this date format is used to check for correct dates.
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
     boolean firstClear = false;
+    private boolean[] daysOfWeek = new boolean[7];
+    //0 is monday, 1 is tuesday, so on.
 
 
     @Override
@@ -72,11 +73,9 @@ public class addHabitActivity extends AppCompatActivity {
 
                 Toast.makeText(addHabitActivity.this, "Adding a Habit!", Toast.LENGTH_SHORT).show();
                 //save habit
-                Habit habit = new Habit(editNameText.getText().toString(), editDateText.getText().toString());
-                //use habit's setters to set days
+                Habit habit = new Habit(editNameText.getText().toString(), editDateText.getText().toString(), daysOfWeek);
                 habitListController.addHabit(habit);
                 finish();
-
             }
         });
 
@@ -93,14 +92,104 @@ public class addHabitActivity extends AppCompatActivity {
             }
         });
 
-
         editDateText.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 editDateText.setTextColor(Color.BLACK);
             }
         });
+
+        //check all checkboxes for all days of the week
+        final CheckBox checkboxMonday = (CheckBox)findViewById(R.id.checkboxMonday);
+        checkboxMonday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    daysOfWeek[0] = true;
+                }
+                else{
+                    daysOfWeek[0] = false;
+                }
+            }
+        });
+        final CheckBox checkboxTuesday = (CheckBox)findViewById(R.id.checkboxTuesday);
+        checkboxTuesday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    daysOfWeek[1] = true;
+                }
+                else{
+                    daysOfWeek[1] = false;
+                }
+            }
+        });
+        final CheckBox checkboxWednesday = (CheckBox)findViewById(R.id.checkboxWednesday);
+        checkboxWednesday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    daysOfWeek[2] = true;
+                }
+                else{
+                    daysOfWeek[2] = false;
+                }
+            }
+        });
+        final CheckBox checkboxThursday = (CheckBox)findViewById(R.id.checkboxThursday);
+        checkboxThursday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    daysOfWeek[3] = true;
+                }
+                else{
+                    daysOfWeek[3] = false;
+                }
+            }
+        });
+        final CheckBox checkboxFriday = (CheckBox)findViewById(R.id.checkboxFriday);
+        checkboxFriday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    daysOfWeek[4] = true;
+                }
+                else{
+                    daysOfWeek[4] = false;
+                }
+            }
+        });
+        final CheckBox checkboxSaturday = (CheckBox)findViewById(R.id.checkboxSaturday);
+        checkboxSaturday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    daysOfWeek[5] = true;
+                }
+                else{
+                    daysOfWeek[5] = false;
+                }
+            }
+        });
+        final CheckBox checkboxSunday = (CheckBox)findViewById(R.id.checkboxSunday);
+        checkboxSunday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    daysOfWeek[6] = true;
+                }
+                else{
+                    daysOfWeek[6] = false;
+                }
+            }
+        });
     }
+
+
+
+
+    //methods
 
     private void setEditDateText() {
         //sets the date for the editDateText EditText
@@ -124,11 +213,9 @@ public class addHabitActivity extends AppCompatActivity {
         } catch (ParseException pe) {
             return false;
         }
-
         if(inputDate.after(currentDate)){
             return false;
         }
-
         return true;
     }
 

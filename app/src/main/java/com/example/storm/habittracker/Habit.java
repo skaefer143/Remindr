@@ -12,18 +12,18 @@ import java.util.Locale;
 
 public class Habit {
     //initialize all Habit data
-    private int lengthOfWeek = 7;
     private Date habitDate = null;
     private String habitName = null;
-    private boolean[] daysOfWeek = new boolean[lengthOfWeek];
+    private boolean[] daysOfWeek = new boolean[7];
     private int completions = 0;
     private int perDayCompletions = 0;
     private boolean completedToday = false;
     private ArrayList<HabitCompletion> pastCompletions = new ArrayList<HabitCompletion>();
 
-    Habit(String nameText, String dateText){
+    Habit(String nameText, String dateText, boolean[] daysOfWeek){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         this.habitName = nameText;
+        this.daysOfWeek = daysOfWeek;
         try {
             this.habitDate = dateFormat.parse(dateText);
         } catch (ParseException pe) {
