@@ -38,11 +38,8 @@ public class MainActivity extends AppCompatActivity {
         habitListController = new HabitListController(getApplicationContext());
 
 
-        //Sets adapter
-        adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, habitListController.getHabitList().getArrayList());
+        //makes sure the list view is available for all to call
         habitListView = (ListView) findViewById(R.id.habitListView);
-        habitListView.setAdapter(adapter);
-        habitListController.setAdapter(adapter); //so we can notify of changes, which makes the list update
 
         //add a habit button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.addHabitFAB);
@@ -63,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
             int position, long id) {
                 Toast.makeText(getApplicationContext(),
-                        "Click ListItem Number " + position, Toast.LENGTH_LONG)
+                        "Click ListItem Number " + position, Toast.LENGTH_SHORT)
                         .show();
             }
         });
@@ -83,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Habit habit = list.get(finalPosition);
                         habitListController.removeHabit(habit);
+                        adapter.notifyDataSetChanged();
                     }
                 });
                 ADB.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -99,13 +97,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        // TODO Auto-generated method stub
         super.onStart();
-        adapter.notifyDataSetChanged();
-
+        //set the adapter
+        adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, habitListController.getHabitList().getArrayList());
+        habitListView.setAdapter(adapter);
     }
 
-
+/* no menu button, don't need
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -126,5 +124,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

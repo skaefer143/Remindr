@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Created by Storm on 2016-09-29.
  */
 
-public class HabitListController implements Serializable{
+public class HabitListController {
     //for saving and loading of habitList
 
     private static final String FILENAME = "file.sav";
@@ -36,9 +36,7 @@ public class HabitListController implements Serializable{
         habitList = loadFromFile();
     }
 
-
-    public HabitList getHabitList() {
-        habitList = loadFromFile();
+    public HabitList getHabitList(){
         return habitList;
     }
 
@@ -70,7 +68,7 @@ public class HabitListController implements Serializable{
 
     public void saveInFile() {
         try {
-            FileOutputStream fos = context.openFileOutput(FILENAME, 0);
+            FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
             //requires context: http://stackoverflow.com/questions/3625837/android-what-is-wrong-with-openfileoutput
 
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
@@ -91,13 +89,15 @@ public class HabitListController implements Serializable{
     }
 
     public void addHabit(Habit habit) {
-        getHabitList().addHabit(habit);
+        habitList.addHabit(habit);
+        saveInFile();
         //adapter.notifyDataSetChanged();
     }
 
     public void removeHabit(Habit habit) {
-        getHabitList().removeHabit(habit);
-        adapter.notifyDataSetChanged();
+        habitList.removeHabit(habit);
+        saveInFile();
+        //adapter.notifyDataSetChanged();
     }
 
     public void setAdapter(ArrayAdapter<Habit> adapter) {

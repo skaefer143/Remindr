@@ -20,10 +20,9 @@ public class Habit {
     private int perDayCompletions = 0;
     private boolean completedToday = false;
     private ArrayList<HabitCompletion> pastCompletions = new ArrayList<HabitCompletion>();
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
 
     Habit(String nameText, String dateText){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         this.habitName = nameText;
         try {
             this.habitDate = dateFormat.parse(dateText);

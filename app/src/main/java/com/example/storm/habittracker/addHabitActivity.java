@@ -60,7 +60,6 @@ public class addHabitActivity extends AppCompatActivity {
                 Habit habit = new Habit(editNameText.getText().toString(), editDateText.getText().toString());
                 //use habit's setters to set days
                 habitListController.addHabit(habit);
-                habitListController.saveInFile();
                 finish();
 
             }
