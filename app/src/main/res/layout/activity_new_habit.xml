@@ -22,7 +22,7 @@
         android:paddingBottom="10dp" />
 
     <TextView
-        android:text="Name:"
+        android:text="Name of Habit:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/nameText"
@@ -83,8 +83,8 @@
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="normal|bold"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp" />
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" />
 
     <CheckBox
         android:text="Monday"
@@ -148,11 +148,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/submitHabitButton"
-        android:layout_marginBottom="79dp"
+        android:onClick="addHabitAction"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:scaleX="3"
-        android:scaleY="3"
-        android:onClick="addHabitAction" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

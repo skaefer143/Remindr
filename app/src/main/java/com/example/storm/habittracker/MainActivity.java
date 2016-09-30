@@ -98,9 +98,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
         //set the adapter
         adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, habitListController.getHabitList().getArrayList());
         habitListView.setAdapter(adapter);
+
     }
 
 /* no menu button, don't need

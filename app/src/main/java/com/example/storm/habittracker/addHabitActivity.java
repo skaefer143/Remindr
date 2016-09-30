@@ -1,6 +1,7 @@
 package com.example.storm.habittracker;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -19,7 +21,7 @@ public class addHabitActivity extends AppCompatActivity {
 
     //this date format is used to check for correct dates.
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
+    boolean firstClear = false;
 
 
     @Override
@@ -37,21 +39,34 @@ public class addHabitActivity extends AppCompatActivity {
 
         final EditText editDateText = (EditText) findViewById(R.id.editDateText);
         final EditText editNameText = (EditText) findViewById(R.id.editNameText);
+
         //submit Habit Button code.
         Button submitHabitButton = (Button) findViewById(R.id.submitHabitButton);
         submitHabitButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //if date is not in correct format, don't save habit
-                String formattedString = editDateText.getText().toString().trim();
-                if(TextUtils.isEmpty(formattedString)){
+                String formattedDateString = editDateText.getText().toString().trim();
+                if(TextUtils.isEmpty(formattedDateString)){
                     editDateText.setError("The Date Field cannot be empty, and must be in format YYYY-MM-DD.");
                     setEditDateText();
                     return;
                 }
-                if(!(isValidDate(formattedString))){
-                    editDateText.setError("Your date is not a valid date");
+                if(!(isValidDate(formattedDateString))){
+                    editDateText.setError("Your date is not a valid date. Since it is a Habit start date, it " +
+                            "cannot be after this date.");
                     setEditDateText();
+                    return;
+                }
+
+                //if the name of the habit is empty or hasn't been changed
+                String formattedNameString = editNameText.getText().toString().trim();
+                if(TextUtils.isEmpty(formattedNameString)){
+                    editNameText.setError("The Name Field cannot be empty.");
+                    return;
+                }
+                if(firstClear == false){
+                    editNameText.setError("You must supply a name.");
                     return;
                 }
 
@@ -69,7 +84,12 @@ public class addHabitActivity extends AppCompatActivity {
         editNameText.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editNameText.getText().clear();
+
+                if(!firstClear){
+                    editNameText.getText().clear();
+                    firstClear = true;
+                }
+                editNameText.setTextColor(Color.BLACK);
             }
         });
 
@@ -77,7 +97,7 @@ public class addHabitActivity extends AppCompatActivity {
         editDateText.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editDateText.getText().clear();
+                editDateText.setTextColor(Color.BLACK);
             }
         });
     }
@@ -94,14 +114,24 @@ public class addHabitActivity extends AppCompatActivity {
 
     private boolean isValidDate(String dateString){
         //got idea from http://www.java2s.com/Tutorial/Java/0120__Development/CheckifaStringisavaliddate.htm
+
+        Date inputDate;
+        Date currentDate = new Date();
+
         dateFormat.setLenient(false);
         try {
-            dateFormat.parse(dateString.trim());
+            inputDate = dateFormat.parse(dateString.trim());
         } catch (ParseException pe) {
             return false;
         }
+
+        if(inputDate.after(currentDate)){
+            return false;
+        }
+
         return true;
     }
+
 
 
 }

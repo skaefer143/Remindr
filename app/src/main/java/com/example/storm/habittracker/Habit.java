@@ -32,6 +32,8 @@ public class Habit {
             //this exception should never happen, and if it does it's because we didn't
             //scrub data hard enough in addHabitActivity
         }
+
+        //from Abram: You can use this date to calculate how many total habits could be completed between creation date and now.
     }
 
 }
