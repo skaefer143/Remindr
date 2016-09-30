@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ import java.util.ArrayList;
  * Created by Storm on 2016-09-29.
  */
 
-public class HabitListController {
+public class HabitListController implements Serializable{
     //for saving and loading of habitList
 
     private static final String FILENAME = "file.sav";
