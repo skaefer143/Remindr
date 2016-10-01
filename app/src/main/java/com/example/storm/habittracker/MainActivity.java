@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -41,38 +42,36 @@ public class MainActivity extends AppCompatActivity {
         //makes sure the list view is available for all to call
         habitListView = (ListView) findViewById(R.id.habitListView);
 
-        //add a habit button
+        //add a addHabit button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.addHabitFAB);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //call activity launcher, launches to Habit creator activity
-
                 Intent addHabitIntent = new Intent(MainActivity.this, addHabitActivity.class);
                 startActivity(addHabitIntent);
             }
         });
 
-
         //Clicking on a habitList element should launch to HabitViewerActivity
         habitListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-            int position, long id) {
-                Toast.makeText(getApplicationContext(),
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this,
                         "Click ListItem Number " + position, Toast.LENGTH_SHORT)
                         .show();
+
             }
         });
 
-            //delete the habit
+        //delete the habit
         habitListView.setOnItemLongClickListener(new OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view,
             int position, long id) {
                 AlertDialog.Builder ADB = new AlertDialog.Builder(MainActivity.this);
                 final ArrayList<Habit> list = habitListController.getHabitList().getArrayList();
-                ADB.setMessage("Delete " + list.get(position).toString() + "?");
+                ADB.setMessage("Delete " + list.get(position).getHabitName() + "?");
                 ADB.setCancelable(true);
                 final int finalPosition = position;
                 ADB.setPositiveButton("Delete", new DialogInterface.OnClickListener(){
@@ -92,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
     }
 
 
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         //set the adapter
-        adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, habitListController.getHabitList().getArrayList());
+        adapter = new HabitArrayAdapter(this, habitListController);
         habitListView.setAdapter(adapter);
 
     }

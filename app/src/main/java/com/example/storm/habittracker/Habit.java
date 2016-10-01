@@ -11,8 +11,10 @@ import java.util.Locale;
  */
 
 public class Habit {
+
     //initialize all Habit data
     private Date habitDate = null;
+    private Date lastCompletedDate = null;
     private String habitName = null;
     private boolean[] daysOfWeek = new boolean[7];
     private int completions = 0;
@@ -36,4 +38,35 @@ public class Habit {
         //from Abram: You can use this date to calculate how many total habits could be completed between creation date and now.
     }
 
+    //getters
+    public boolean[] getDaysOfWeek() {return daysOfWeek;}
+    public Date getHabitDate() {return habitDate;}
+    public String getHabitName() {return habitName;}
+    public ArrayList<HabitCompletion> getPastCompletions() {return pastCompletions;}
+    public boolean isCompletedToday() {
+        try {
+            if(lastCompletedDate.before(new Date())){
+                completedToday = false;
+            }
+            else{ completedToday = true; }
+        } catch (NullPointerException e){
+            this.lastCompletedDate = new Date(0);
+            completedToday = false;
+            //set lastCompletedDate to default date, for comparisons
+        }
+
+        return completedToday;
+    }
+    public int getPerDayCompletions() {return perDayCompletions;}
+    public int getCompletions() {return completions;}
+
+
+    //setters
+    public void setCompletedToday(boolean completedToday) {
+        this.lastCompletedDate = new Date();
+        this.completedToday = completedToday;
+    }
+
+
+    //methods
 }
