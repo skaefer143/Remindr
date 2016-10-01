@@ -16,7 +16,20 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:id="@+id/habitListView"
+        android:layout_below="@+id/mainHabitsTitle" />
+
+    <TextView
+        android:text="Habits:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mainHabitsTitle"
+        android:fontFamily="sans-serif"
+        android:textSize="30sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/habitListView" />
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textStyle="normal|bold" />
 </RelativeLayout>

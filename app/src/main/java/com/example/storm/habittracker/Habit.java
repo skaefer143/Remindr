@@ -3,6 +3,7 @@ package com.example.storm.habittracker;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -18,7 +19,6 @@ public class Habit {
     private String habitName = null;
     private boolean[] daysOfWeek = new boolean[7];
     private int completions = 0;
-    private int perDayCompletions = 0;
     private boolean completedToday = false;
     private ArrayList<HabitCompletion> pastCompletions = new ArrayList<HabitCompletion>();
 
@@ -39,7 +39,6 @@ public class Habit {
     }
 
     //getters
-    public boolean[] getDaysOfWeek() {return daysOfWeek;}
     public Date getHabitDate() {return habitDate;}
     public String getHabitName() {return habitName;}
     public ArrayList<HabitCompletion> getPastCompletions() {return pastCompletions;}
@@ -57,14 +56,50 @@ public class Habit {
 
         return completedToday;
     }
-    public int getPerDayCompletions() {return perDayCompletions;}
     public int getCompletions() {return completions;}
+    public boolean needToCompleteToday(){
+        if(this.completedToday){
+            //we don't need to complete again today, if we have completed the habit!
+            return false;
+        }
+        //else, check today, and check which days we wanted to do this habit
+        Calendar today = Calendar.getInstance();
+        today.setTime(new Date());
+        int dayOfWeek = today.get(Calendar.DAY_OF_WEEK);
+        //check all the days, and see if today is a day we need to do our habit
+        if((dayOfWeek == Calendar.MONDAY) && (daysOfWeek[0])){
+            return true;
+        }
+        if((dayOfWeek == Calendar.TUESDAY) && (daysOfWeek[1])){
+            return true;
+        }
+        if((dayOfWeek == Calendar.WEDNESDAY) && (daysOfWeek[2])){
+            return true;
+        }
+        if((dayOfWeek == Calendar.THURSDAY) && (daysOfWeek[3])){
+            return true;
+        }
+        if((dayOfWeek == Calendar.FRIDAY) && (daysOfWeek[4])){
+            return true;
+        }
+        if((dayOfWeek == Calendar.SATURDAY) && (daysOfWeek[5])){
+            return true;
+        }
+        if((dayOfWeek == Calendar.SUNDAY) && (daysOfWeek[6])){
+            return true;
+        }
+        //else, if none of those work
+        return false;
+    }
 
 
     //setters
     public void setCompletedToday(boolean completedToday) {
         this.lastCompletedDate = new Date();
         this.completedToday = completedToday;
+        this.completions++;
+        //add to an arraylist of pastcompletions
+        //this.pastCompletions.add();
     }
 
 

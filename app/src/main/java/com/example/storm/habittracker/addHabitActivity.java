@@ -31,6 +31,7 @@ public class addHabitActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_habit);
 
         //load habitList from file, using habitListController
+        //allows for ease of transferring the habitList between activities
         final HabitListController habitListController = new HabitListController(getApplicationContext());
         habitListController.loadFromFile();
 

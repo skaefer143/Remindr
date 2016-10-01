@@ -91,16 +91,10 @@ public class HabitListController {
     public void addHabit(Habit habit) {
         habitList.addHabit(habit);
         saveInFile();
-        //adapter.notifyDataSetChanged();
     }
 
     public void removeHabit(Habit habit) {
         habitList.removeHabit(habit);
         saveInFile();
-        //adapter.notifyDataSetChanged();
-    }
-
-    public void setAdapter(ArrayAdapter<Habit> adapter) {
-        this.adapter = adapter;
     }
 }

@@ -53,14 +53,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Clicking on a habitList element should launch to HabitViewerActivity
+        //Clicking on a habitList element should launch to HabitStatsActivity
         habitListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this,
-                        "Click ListItem Number " + position, Toast.LENGTH_SHORT)
-                        .show();
-
+                Intent habitStatsIntent = new Intent(MainActivity.this, habitStatsActivity.class);
+                habitStatsIntent.putExtra("position", position);
+                startActivity(habitStatsIntent);
             }
         });
 
