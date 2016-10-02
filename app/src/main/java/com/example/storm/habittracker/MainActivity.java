@@ -1,34 +1,39 @@
+/* MainActivity:
+
+Purpose: This is the activity that launches when the app opens. It displays the listview of all
+habits, and that works off of a custom ArrayAdapter. The point is to be able to easily see all your
+habits that you have added. There is also an add Habit floating action button in the bottom right,
+so it's easy to see where to add a habit.
+
+Design Rationale: This is an easy way to view Habits, and whether or not they need to be completed,
+so this made sense to implement.
+
+Outstanding Issues:
+
+Copyright {2016} {Nathan Storm Kaefer} */
+
 package com.example.storm.habittracker;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import static android.R.id.list;
 
 public class MainActivity extends AppCompatActivity {
 
     private ListView habitListView;
     private HabitArrayAdapter adapter;
     private HabitListController habitListController;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         habitListController = new HabitListController(getApplicationContext());
-
 
         //makes sure the list view is available for all to call
         habitListView = (ListView) findViewById(R.id.habitListView);
@@ -63,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 ADB.setMessage("Delete " + list.get(position).getHabitName() + "?");
                 ADB.setCancelable(true);
                 final int finalPosition = position;
-                ADB.setPositiveButton("Delete", new DialogInterface.OnClickListener(){
+                ADB.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         adapter.myRemove(finalPosition);
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 });
                 ADB.show();
                 return true;
+                //return true means the ADB showed up and we can't click on anything else.
             }
         });
 
@@ -103,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         //set the adapter
         habitListController.loadFromFile();
@@ -111,27 +116,4 @@ public class MainActivity extends AppCompatActivity {
         habitListView.setAdapter(adapter);
 
     }
-
-/* no menu button, don't need
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 }

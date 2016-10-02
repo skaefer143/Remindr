@@ -1,3 +1,25 @@
+/* HabitArrayAdapter:
+
+Purpose: Extends a normal ArrayAdapter<Habit>, however adds my own custom code for customizing the
+view, updating the view when removing an item from the base Array, and logic for checking whether
+Yes or No needs to be put next to the TextViews in the Array. Also uses my custom layout for viewing
+Arrays of Habits.
+
+Design Rationale: I wanted to pass in my habitListController to the Constructor, as then I can save my
+instance of habitListController (and habitList) without having to load from file. Also, I made my own
+remove method for removing Habits from the habitList, as I wanted more control over removing Habits,
+and also this way I didn't have to make a new HabitArrayAdapter (in MainActivity) everytime
+my dataset changed.
+
+Outstanding Issues: I have Strings that I'm just writing out that aren't from a string file.
+
+Websites that helped with code:
+Sitepoint
+https://www.sitepoint.com/custom-data-layouts-with-your-own-android-arrayadapter/
+    -Simon Codrington
+
+Copyright {2016} {Nathan Storm Kaefer} */
+
 package com.example.storm.habittracker;
 
 import android.content.Context;
@@ -5,12 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 /**
  * Created by Storm on 2016-10-01.

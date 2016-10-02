@@ -1,3 +1,21 @@
+/* HabitListController:
+
+Purpose: This is the Object that manages the habitList, by saving it and loading it from file.
+
+Design Rationale: This makes sense in an OO perspective, as I didn't want the habitList saving or
+loading itself, I wanted another object to do that.
+
+Outstanding Issues: removeHabit() isn't being used, and it really could be. I remove things from
+the main HabitList sometimes throughtout my code by using getHabitList() and then removing the habit
+directly from the habitList using methods. I could streamline this and make it better, but it works.
+
+Websites that helped with code:
+Stack Overflow Answer
+http://stackoverflow.com/questions/3625837/android-what-is-wrong-with-openfileoutput
+    -naikus
+
+Copyright {2016} {Nathan Storm Kaefer} */
+
 package com.example.storm.habittracker;
 
 import android.content.Context;

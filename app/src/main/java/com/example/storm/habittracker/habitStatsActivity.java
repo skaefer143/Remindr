@@ -1,3 +1,17 @@
+/* habitStatsActivity:
+
+Purpose: This is the activity that runs when a habit is clicked on in MainActivity. It displays the
+stats of the habit, such as whether it's been completed today and also the past completions. It also
+contains the completion button, that marks the Habit as completed for today.
+
+Design Rationale: I made the set...() methods to simplify reading how all the different TextViews are
+set. Also, they could potentially be called 2 or more times (for instance when the habit completion
+button is pressed) so that's why I did that.
+
+Outstanding Issues:
+
+Copyright {2016} {Nathan Storm Kaefer} */
+
 package com.example.storm.habittracker;
 
 import android.app.AlertDialog;
@@ -99,12 +113,6 @@ public class habitStatsActivity extends AppCompatActivity implements Serializabl
     @Override
     protected void onResume(){
         super.onResume();
-
-        //need to reupdate all values on resume, if we switched the current habit.
-        habitListController.loadFromFile();
-        this.position = (Integer)getIntent().getSerializableExtra("position");
-        currentHabit = habitListController.getHabitList().getArrayList().get(position);
-
         //set the adapter
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
                 currentHabit.getPastCompletions());

@@ -1,6 +1,32 @@
-package com.example.storm.habittracker;
+/* Habit:
 
-import android.text.format.DateUtils;
+Purpose: This is the class for the Habit object. It outlines all the variables a Habit object needs
+and builds a Habit object by passing in the Name, creation date, and the days of week we want to
+complete the habit.
+
+Design Rationale: You create a Habit by calling the constructor, which sets the basic variables which
+make a habit a habit. These cannot be changed. All the other variables are get and set by methods
+in the class. Also, combining setting all the completion values in the setCompleted today method
+was done just to save code and time. It really just made sense. Putting the logic for getting
+completedToday and needToCompleteToday in the Habit class also made sense, as this logic should be
+in the Habit class, as per OO design principles.
+
+Outstanding Issues: There was an issue with checking and comparing Calendar dates, and ideally I really
+should find a better way of doing things (perhaps using a different date object altogether), but for
+now it works and I've checked it works so I'm not too worried.
+
+Websites that helped with code:
+Stack Overflow Answer
+http://stackoverflow.com/questions/2517709/comparing-two-java-util-dates-to-see-if-they-are-in-the-same-day
+    - Michael Borgwardt
+
+Stack Overflow Answer
+http://stackoverflow.com/questions/12970296/comparing-two-calendar-objects
+    - Drogba
+
+Copyright {2016} {Nathan Storm Kaefer} */
+
+package com.example.storm.habittracker;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,15 +59,12 @@ public class Habit {
         } catch (ParseException pe) {
             System.out.println(habitDate);
             pe.printStackTrace();
-            //this exception should never happen, and if it does it's because we didn't
-            //scrub data hard enough in addHabitActivity
+            /*this exception should never happen, and if it does it's because we didn't
+            scrub data hard enough in addHabitActivity*/
         }
-
-        //from Abram: You can use this date to calculate how many total habits could be completed between creation date and now.
     }
 
     //getters
-    public Date getHabitDate() {return habitDate;}
     public String getHabitName() {return habitName;}
     public ArrayList<HabitCompletion> getPastCompletions() {return pastCompletions;}
     public boolean isCompletedToday() {
@@ -60,6 +83,7 @@ public class Habit {
             if((pastCalDate.compareTo(todayCalDate) < 0) &&
                     (pastCalDate.get(Calendar.DAY_OF_YEAR) != todayCalDate.get(Calendar.DAY_OF_YEAR))){
                 //if one day is less than the other day
+                //help from http://stackoverflow.com/questions/12970296/comparing-two-calendar-objects
                 completedToday = false;
             }
             else{

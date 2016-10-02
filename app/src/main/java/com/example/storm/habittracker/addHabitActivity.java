@@ -1,3 +1,26 @@
+/* addHabitActivity:
+
+Purpose: This is the activity that launches when we hit the add Habit Button in Main activity.
+It's purpose is to check for correct input, save everything to a Habit, and add that habit to the main habitList.
+
+Design Rationale: This class is mostly just a big onCreate method, with lots of Button and EditText
+listeners, so we can correctly save the inputted data. The two methods setEditDateText and isValidDate are
+methods for simple ease of use. Really it just makes the code look neater.
+
+Outstanding Issues: The big section of checkbox listeners is a little bit messy, however I couldn't
+figure out a good way of condensing it. It was easier to implement by checking every single checkbox
+in it's own setOnCheckedChangeListener.
+
+Websites that helped with code:
+Beginners Book Article
+http://beginnersbook.com/2013/05/current-date-time-in-java/
+    - Chaitanya Singh
+
+Java2s
+http://www.java2s.com/Tutorial/Java/0120__Development/CheckifaStringisavaliddate.htm
+
+Copyright {2016} {Nathan Storm Kaefer} */
+
 package com.example.storm.habittracker;
 
 import android.graphics.Color;
@@ -67,7 +90,7 @@ public class addHabitActivity extends AppCompatActivity {
                     editNameText.setError("The Name Field cannot be empty.");
                     return;
                 }
-                if(firstClear == false){
+                if(!firstClear){
                     editNameText.setError("You must supply a name.");
                     return;
                 }
