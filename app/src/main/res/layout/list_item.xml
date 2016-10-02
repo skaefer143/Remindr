@@ -22,14 +22,23 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="TextView"
+        android:text="Needs to be Completed today: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/needsToBeCompleted"
+        android:textSize="18sp"
+        android:textStyle="normal|italic"
+        android:layout_below="@+id/habitName" />
+
+    <TextView
+        android:text="Habit Completed Today: "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/completedToday"
-        android:layout_below="@+id/habitName"
-        android:layout_alignParentStart="true"
         android:textSize="18sp"
         android:textStyle="normal|italic"
-        android:textColor="?android:attr/textColorTertiary" />
+        android:textColor="?android:attr/textColorTertiary"
+        android:layout_below="@+id/needsToBeCompleted"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

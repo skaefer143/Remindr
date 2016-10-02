@@ -1,34 +1,47 @@
 package com.example.storm.habittracker;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class habitStatsActivity extends AppCompatActivity implements Serializable{
 
+    private HabitListController habitListController;
+    private ListView pastCompletionsListView;
+    private int position;
+    private ArrayAdapter<HabitCompletion> adapter;
+    private Habit currentHabit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_stats);
 
+        //setup objects that need to be created
+        pastCompletionsListView = (ListView) findViewById(R.id.pastCompletions);
+        habitListController = new HabitListController(getApplicationContext());
+        this.position = (Integer)getIntent().getSerializableExtra("position");
+        currentHabit = habitListController.getHabitList().getArrayList().get(position);
+
         //load habitList from file, using habitListController
         //allows for ease of transferring the habitList between activities
-        final HabitListController habitListController = new HabitListController(getApplicationContext());
         habitListController.loadFromFile();
-        final int position = (Integer)getIntent().getSerializableExtra("position");
 
         //set all the textViews
-        setHabitName(position, habitListController);
-        setDisplayCompletionsToday(position, habitListController);
-        setCompleteTodayNeed(position, habitListController);
-        setCompletionAmount(position, habitListController);
+        setHabitName();
+        setDisplayCompletionsToday();
+        setCompleteTodayNeed();
+        setCompletionAmount();
 
         //check the complete button
         Button completionButton = (Button) findViewById(R.id.completionButton);
@@ -36,12 +49,17 @@ public class habitStatsActivity extends AppCompatActivity implements Serializabl
             @Override
             public void onClick(View v) {
                 //set that we completed it
-                habitListController.getHabitList().getArrayList().get(position).setCompletedToday(true);
+                currentHabit.setCompletedToday(true);
 
                 //update everything
-                setDisplayCompletionsToday(position, habitListController);
-                setCompleteTodayNeed(position, habitListController);
-                setCompletionAmount(position, habitListController);
+                setDisplayCompletionsToday();
+                setCompleteTodayNeed();
+                setCompletionAmount();
+                HabitCompletion habitCompletion = new HabitCompletion(currentHabit.getCompletions());
+                addPastCompletion(habitCompletion);
+
+                //update pastCompletionsListView
+                adapter.notifyDataSetChanged();
 
                 //save in file
                 habitListController.saveInFile();
@@ -49,22 +67,63 @@ public class habitStatsActivity extends AppCompatActivity implements Serializabl
             }
         });
 
+        //delete the Habit Completion
+        pastCompletionsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view,
+                                           int position, long id) {
+                AlertDialog.Builder ADB = new AlertDialog.Builder(getApplicationContext());
+                final ArrayList<HabitCompletion> list = currentHabit.getPastCompletions();
+                ADB.setMessage("Delete Completion #" +
+                        String.valueOf(list.get(position).getCompletedNumber()) + "?");
+                ADB.setCancelable(true);
+                final int finalPosition = position;
+                ADB.setPositiveButton("Delete", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        list.remove(finalPosition);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+                ADB.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                ADB.show();
+                return true;
+            }
+        });
+    }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        //updates the position and habit
+        this.position = (Integer)getIntent().getSerializableExtra("position");
+        currentHabit = habitListController.getHabitList().getArrayList().get(position);
+
+        //set the adapter
+        habitListController.loadFromFile();
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
+                currentHabit.getPastCompletions());
+        pastCompletionsListView.setAdapter(adapter);
     }
 
 
-    private void setHabitName(int position, HabitListController habitListController) {
+    private void setHabitName() {
         TextView displayHabitName = (TextView)findViewById(R.id.displayHabitName);
-        String habitName = habitListController.getHabitList().getArrayList().get(position).getHabitName();
+        String habitName = currentHabit.getHabitName();
         displayHabitName.setText(habitName);
 
     }
 
-    private void setDisplayCompletionsToday(int position, HabitListController habitListController) {
+    private void setDisplayCompletionsToday() {
         TextView displayCompletedToday = (TextView) findViewById(R.id.displayCompletedToday);
 
         String isCompletedToday;
-        if ( habitListController.getHabitList().getArrayList().get(position).isCompletedToday()) {
+        if ( currentHabit.isCompletedToday()) {
             isCompletedToday = "Yes";
         } else {
             isCompletedToday = "No";
@@ -72,11 +131,11 @@ public class habitStatsActivity extends AppCompatActivity implements Serializabl
         displayCompletedToday.setText("Completed Today: " + isCompletedToday);
     }
 
-    private void setCompleteTodayNeed(int position, HabitListController habitListController) {
+    private void setCompleteTodayNeed() {
         TextView displayCompleteTodayNeed = (TextView) findViewById(R.id.displayCompleteTodayNeed);
 
         String needToComplete;
-        if ( habitListController.getHabitList().getArrayList().get(position).needToCompleteToday()) {
+        if ( currentHabit.needToCompleteToday()) {
             needToComplete = "Yes";
         } else {
             needToComplete = "No";
@@ -84,10 +143,14 @@ public class habitStatsActivity extends AppCompatActivity implements Serializabl
         displayCompleteTodayNeed.setText("Needs to be Completed Today: " + needToComplete);
     }
 
-    private void setCompletionAmount(int position, HabitListController habitListController) {
+    private void setCompletionAmount() {
         TextView displayCompletionAmount = (TextView) findViewById(R.id.displayCompletionAmount);
-        int completionAmount = habitListController.getHabitList().getArrayList().get(position).getCompletions();
+        int completionAmount = currentHabit.getCompletions();
         displayCompletionAmount.setText("Has been completed " + String.valueOf(completionAmount) + " times");
+    }
+
+    private void addPastCompletion(HabitCompletion habitCompletion){
+        currentHabit.getPastCompletions().add(0, habitCompletion);
     }
 
 

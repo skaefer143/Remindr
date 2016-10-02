@@ -47,6 +47,7 @@ public class HabitArrayAdapter extends ArrayAdapter<Habit> {
         //get data population elements
         TextView habitName = (TextView) convertView.findViewById(R.id.habitName);
         TextView completedToday = (TextView) convertView.findViewById(R.id.completedToday);
+        TextView needsToBeCompleted = (TextView) convertView.findViewById(R.id.needsToBeCompleted);
 
         //set the view using data
         habitName.setText(habit.getHabitName());
@@ -59,7 +60,19 @@ public class HabitArrayAdapter extends ArrayAdapter<Habit> {
         }
         completedToday.setText("Habit Completed Today: " + isCompletedToday);
 
+        //logic for checking whether needs to be complete today or not
+        String needToComplete;
+        if ( habit.needToCompleteToday()) {
+            needToComplete = "Yes";
+        } else {
+            needToComplete = "No";
+        }
+        needsToBeCompleted.setText("Needs to be Completed Today: " + needToComplete);
+
+
         //return the completed view to render on screen
         return convertView;
     }
 }
+
+

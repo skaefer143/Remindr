@@ -1,82 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_habit_stats"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.storm.habittracker.habitStatsActivity">
+    android:fillViewport="true">
 
-    <TextView
-        android:text="HabitName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/displayHabitName"
-        android:textAlignment="center"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="24sp"
-        android:textColor="@android:color/black"
-        android:paddingBottom="10dp" />
-
-    <Button
-        android:text="Complete Habit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/completionButton"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:text="Completed Today: "
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/displayHabitName"
-        android:layout_alignParentStart="true"
-        android:id="@+id/displayCompletedToday"
-        android:textSize="18sp"
-        android:fontFamily="sans-serif"
-        android:paddingBottom="5dp" />
-
-    <TextView
-        android:text="Needs to be completed today:"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/displayCompletedToday"
-        android:layout_alignParentStart="true"
-        android:id="@+id/displayCompleteTodayNeed"
-        android:textSize="18sp"
-        android:paddingBottom="5dp" />
-
-    <TextView
-        android:text="Has been completed: times"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/displayCompletionAmount"
-        android:textSize="18sp"
-        android:paddingBottom="5dp"
-        android:layout_below="@+id/displayCompleteTodayNeed"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="Past Completions:"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/displayCompletionAmount"
-        android:layout_alignParentStart="true"
-        android:id="@+id/pastCompletionsText"
-        android:textSize="18sp"
-        android:textStyle="normal|bold"
-        android:paddingBottom="5dp" />
-
-    <ListView
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_habit_stats"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/pastCompletionsText"
-        android:layout_above="@+id/completionButton"
-        android:layout_alignParentStart="true" />
-</RelativeLayout>
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.example.storm.habittracker.habitStatsActivity">
+
+        <TextView
+            android:text="HabitName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/displayHabitName"
+            android:textAlignment="center"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="24sp"
+            android:textColor="@android:color/black"
+            android:paddingBottom="10dp" />
+
+        <Button
+            android:text="Complete Habit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/completionButton"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:text="Completed Today: "
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/displayHabitName"
+            android:layout_alignParentStart="true"
+            android:id="@+id/displayCompletedToday"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif"
+            android:paddingBottom="5dp" />
+
+        <TextView
+            android:text="Needs to be completed today:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/displayCompletedToday"
+            android:layout_alignParentStart="true"
+            android:id="@+id/displayCompleteTodayNeed"
+            android:textSize="18sp"
+            android:paddingBottom="5dp" />
+
+        <TextView
+            android:text="Has been completed: times"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/displayCompletionAmount"
+            android:textSize="18sp"
+            android:paddingBottom="5dp"
+            android:layout_below="@+id/displayCompleteTodayNeed"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Past Completions:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/displayCompletionAmount"
+            android:layout_alignParentStart="true"
+            android:id="@+id/pastCompletionsText"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:paddingBottom="5dp" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/pastCompletionsText"
+            android:layout_above="@+id/completionButton"
+            android:layout_alignParentStart="true"
+            android:id="@+id/pastCompletions" />
+    </RelativeLayout>
+</ScrollView>

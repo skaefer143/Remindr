@@ -45,6 +45,7 @@ public class Habit {
     public String getHabitName() {return habitName;}
     public ArrayList<HabitCompletion> getPastCompletions() {return pastCompletions;}
     public boolean isCompletedToday() {
+        //used idea from http://stackoverflow.com/questions/2517709/comparing-two-java-util-dates-to-see-if-they-are-in-the-same-day
         Calendar pastCalDate = Calendar.getInstance();
         Calendar todayCalDate = Calendar.getInstance();
         try{
@@ -112,6 +113,4 @@ public class Habit {
         //this.pastCompletions.add();
     }
 
-
-    //methods
 }

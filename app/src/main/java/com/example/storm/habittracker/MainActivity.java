@@ -53,21 +53,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Clicking on a habitList element should launch to HabitStatsActivity
-        habitListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent habitStatsIntent = new Intent(MainActivity.this, habitStatsActivity.class);
-                habitStatsIntent.putExtra("position", position);
-                startActivity(habitStatsIntent);
-            }
-        });
-
         //delete the habit
         habitListView.setOnItemLongClickListener(new OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view,
-            int position, long id) {
+                                           int position, long id) {
                 AlertDialog.Builder ADB = new AlertDialog.Builder(MainActivity.this);
                 final ArrayList<Habit> list = habitListController.getHabitList().getArrayList();
                 ADB.setMessage("Delete " + list.get(position).getHabitName() + "?");
@@ -87,10 +77,19 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 ADB.show();
-                return false;
+                return true;
             }
         });
 
+        //Clicking on a habitList element should launch to HabitStatsActivity
+        habitListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent habitStatsIntent = new Intent(MainActivity.this, habitStatsActivity.class);
+                habitStatsIntent.putExtra("position", position);
+                startActivity(habitStatsIntent);
+            }
+        });
 
     }
 
