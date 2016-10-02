@@ -30,12 +30,13 @@ public class habitStatsActivity extends AppCompatActivity implements Serializabl
         //setup objects that need to be created
         pastCompletionsListView = (ListView) findViewById(R.id.pastCompletions);
         habitListController = new HabitListController(getApplicationContext());
-        this.position = (Integer)getIntent().getSerializableExtra("position");
-        currentHabit = habitListController.getHabitList().getArrayList().get(position);
+
 
         //load habitList from file, using habitListController
         //allows for ease of transferring the habitList between activities
         habitListController.loadFromFile();
+        this.position = (Integer)getIntent().getSerializableExtra("position");
+        currentHabit = habitListController.getHabitList().getArrayList().get(position);
 
         //set all the textViews
         setHabitName();
@@ -67,12 +68,12 @@ public class habitStatsActivity extends AppCompatActivity implements Serializabl
             }
         });
 
-        //delete the Habit Completion
+        //delete the habit
         pastCompletionsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view,
                                            int position, long id) {
-                AlertDialog.Builder ADB = new AlertDialog.Builder(getApplicationContext());
+                AlertDialog.Builder ADB = new AlertDialog.Builder(habitStatsActivity.this);
                 final ArrayList<HabitCompletion> list = currentHabit.getPastCompletions();
                 ADB.setMessage("Delete Completion #" +
                         String.valueOf(list.get(position).getCompletedNumber()) + "?");
@@ -100,12 +101,11 @@ public class habitStatsActivity extends AppCompatActivity implements Serializabl
     protected void onResume(){
         super.onResume();
 
-        //updates the position and habit
+        habitListController.loadFromFile();
         this.position = (Integer)getIntent().getSerializableExtra("position");
         currentHabit = habitListController.getHabitList().getArrayList().get(position);
 
         //set the adapter
-        habitListController.loadFromFile();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
                 currentHabit.getPastCompletions());
         pastCompletionsListView.setAdapter(adapter);
