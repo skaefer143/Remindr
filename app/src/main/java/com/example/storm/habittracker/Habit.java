@@ -57,8 +57,8 @@ public class Habit {
             return completedToday;
         }
         todayCalDate.setTime(new Date());
-            if((pastCalDate.get(Calendar.YEAR) <= todayCalDate.get(Calendar.YEAR)) &&
-                    (pastCalDate.get(Calendar.DAY_OF_YEAR) < todayCalDate.get(Calendar.DAY_OF_YEAR))){
+            if((pastCalDate.compareTo(todayCalDate) < 0) &&
+                    (pastCalDate.get(Calendar.DAY_OF_YEAR) != todayCalDate.get(Calendar.DAY_OF_YEAR))){
                 //if one day is less than the other day
                 completedToday = false;
             }
@@ -110,7 +110,8 @@ public class Habit {
         this.completedToday = completedToday;
         this.completions++;
         //add to an arraylist of pastcompletions
-        //this.pastCompletions.add();
+        HabitCompletion habitCompletion = new HabitCompletion(completions);
+        this.pastCompletions.add(0, habitCompletion);
     }
 
 }

@@ -26,7 +26,7 @@ import static android.R.id.list;
 public class MainActivity extends AppCompatActivity {
 
     private ListView habitListView;
-    private ArrayAdapter<Habit> adapter;
+    private HabitArrayAdapter adapter;
     private HabitListController habitListController;
 
 
@@ -66,9 +66,11 @@ public class MainActivity extends AppCompatActivity {
                 ADB.setPositiveButton("Delete", new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Habit habit = list.get(finalPosition);
-                        habitListController.removeHabit(habit);
-                        adapter.notifyDataSetChanged();
+                        adapter.myRemove(finalPosition);
+                        habitListController.saveInFile();
+                        habitListController.loadFromFile();
+                        adapter.clear();
+                        adapter.addAll(habitListController.getHabitList().getArrayList());
                     }
                 });
                 ADB.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

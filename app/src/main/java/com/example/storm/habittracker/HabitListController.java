@@ -27,7 +27,6 @@ public class HabitListController {
 
     private static final String FILENAME = "file.sav";
     private static HabitList habitList = null;
-    private  ArrayAdapter<Habit> adapter;
     private Context context;
 
     public HabitListController(Context context){

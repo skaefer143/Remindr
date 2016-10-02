@@ -56,8 +56,7 @@ public class habitStatsActivity extends AppCompatActivity implements Serializabl
                 setDisplayCompletionsToday();
                 setCompleteTodayNeed();
                 setCompletionAmount();
-                HabitCompletion habitCompletion = new HabitCompletion(currentHabit.getCompletions());
-                addPastCompletion(habitCompletion);
+
 
                 //update pastCompletionsListView
                 adapter.notifyDataSetChanged();
@@ -101,6 +100,7 @@ public class habitStatsActivity extends AppCompatActivity implements Serializabl
     protected void onResume(){
         super.onResume();
 
+        //need to reupdate all values on resume, if we switched the current habit.
         habitListController.loadFromFile();
         this.position = (Integer)getIntent().getSerializableExtra("position");
         currentHabit = habitListController.getHabitList().getArrayList().get(position);
@@ -147,10 +147,6 @@ public class habitStatsActivity extends AppCompatActivity implements Serializabl
         TextView displayCompletionAmount = (TextView) findViewById(R.id.displayCompletionAmount);
         int completionAmount = currentHabit.getCompletions();
         displayCompletionAmount.setText("Has been completed " + String.valueOf(completionAmount) + " times");
-    }
-
-    private void addPastCompletion(HabitCompletion habitCompletion){
-        currentHabit.getPastCompletions().add(0, habitCompletion);
     }
 
 
