@@ -2,7 +2,8 @@
 
 This is a ToDo list/Habit tracker Android app built for Assignment 1. 
 
-(Put video link here to working app)
+Video of Working App: (October 2, 2016)
+https://youtu.be/XD42RtyMwF0
 
 
 References/Sources Used:
