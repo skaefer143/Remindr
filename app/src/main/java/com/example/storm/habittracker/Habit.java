@@ -1,5 +1,7 @@
 package com.example.storm.habittracker;
 
+import android.text.format.DateUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ public class Habit {
             //this exception should never happen, and if it does it's because we didn't
             //scrub data hard enough in addHabitActivity
         }
+        this.lastCompletedDate = new Date(0); // makes a default date
 
         //from Abram: You can use this date to calculate how many total habits could be completed between creation date and now.
     }
@@ -43,17 +46,25 @@ public class Habit {
     public String getHabitName() {return habitName;}
     public ArrayList<HabitCompletion> getPastCompletions() {return pastCompletions;}
     public boolean isCompletedToday() {
-        try {
-            if(lastCompletedDate.before(new Date())){
-                completedToday = false;
-            }
-            else{ completedToday = true; }
-        } catch (NullPointerException e){
+        Calendar pastCalDate = Calendar.getInstance();
+        Calendar todayCalDate = Calendar.getInstance();
+        try{
+            pastCalDate.setTime(lastCompletedDate);
+        } catch (NullPointerException e) {
+            //if we get an exception, just set to set lastCompletedDate to default date, for comparisons
             this.lastCompletedDate = new Date(0);
             completedToday = false;
-            //set lastCompletedDate to default date, for comparisons
+            return completedToday;
         }
-
+        todayCalDate.setTime(new Date());
+            if((pastCalDate.get(Calendar.YEAR) <= todayCalDate.get(Calendar.YEAR)) &&
+                    (pastCalDate.get(Calendar.DAY_OF_YEAR) < todayCalDate.get(Calendar.DAY_OF_YEAR))){
+                //if one day is less than the other day
+                completedToday = false;
+            }
+            else{
+                completedToday = true;
+            }
         return completedToday;
     }
     public int getCompletions() {return completions;}

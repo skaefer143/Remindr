@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         //set the adapter
+        habitListController.loadFromFile();
         adapter = new HabitArrayAdapter(this, habitListController);
         habitListView.setAdapter(adapter);
 
