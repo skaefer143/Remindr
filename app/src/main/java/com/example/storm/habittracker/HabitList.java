@@ -9,7 +9,7 @@ does not handle saving or loading from file.
 
 Outstanding Issues:
 
-Copyright {2016} {Nathan Storm Kaefer} */
+Copyright 2016 Nathan Storm Kaefer */
 
 package com.example.storm.habittracker;
 
@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 
 public class HabitList {
-    ArrayList<Habit> habitList = null;
+    private ArrayList<Habit> habitList = null;
 
 
     public HabitList(){

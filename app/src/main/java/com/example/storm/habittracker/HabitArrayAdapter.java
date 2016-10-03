@@ -18,7 +18,7 @@ Sitepoint
 https://www.sitepoint.com/custom-data-layouts-with-your-own-android-arrayadapter/
     -Simon Codrington
 
-Copyright {2016} {Nathan Storm Kaefer} */
+Copyright 2016 Nathan Storm Kaefer */
 
 package com.example.storm.habittracker;
 

@@ -10,7 +10,7 @@ button is pressed) so that's why I did that.
 
 Outstanding Issues:
 
-Copyright {2016} {Nathan Storm Kaefer} */
+Copyright 2016 Nathan Storm Kaefer */
 
 package com.example.storm.habittracker;
 

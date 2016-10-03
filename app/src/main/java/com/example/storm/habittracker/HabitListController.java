@@ -14,7 +14,7 @@ Stack Overflow Answer
 http://stackoverflow.com/questions/3625837/android-what-is-wrong-with-openfileoutput
     -naikus
 
-Copyright {2016} {Nathan Storm Kaefer} */
+Copyright 2016 Nathan Storm Kaefer */
 
 package com.example.storm.habittracker;
 

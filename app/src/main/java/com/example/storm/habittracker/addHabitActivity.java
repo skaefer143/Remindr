@@ -19,7 +19,7 @@ http://beginnersbook.com/2013/05/current-date-time-in-java/
 Java2s
 http://www.java2s.com/Tutorial/Java/0120__Development/CheckifaStringisavaliddate.htm
 
-Copyright {2016} {Nathan Storm Kaefer} */
+Copyright 2016 Nathan Storm Kaefer */
 
 package com.example.storm.habittracker;
 

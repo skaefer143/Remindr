@@ -24,7 +24,7 @@ Stack Overflow Answer
 http://stackoverflow.com/questions/12970296/comparing-two-calendar-objects
     - Drogba
 
-Copyright {2016} {Nathan Storm Kaefer} */
+Copyright 2016 Nathan Storm Kaefer */
 
 package com.example.storm.habittracker;
 

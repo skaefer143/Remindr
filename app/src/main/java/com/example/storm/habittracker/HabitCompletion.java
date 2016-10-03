@@ -10,7 +10,7 @@ Outstanding Issues: I'm Overriding the normal ArrayList<HabitCompletion>.toStrin
 own, that will display my own values. There might be better ways of displaying the data in a
 ListView, but we used this in lonelyTwitter, so I assumed this would work fine.
 
-Copyright {2016} {Nathan Storm Kaefer} */
+Copyright 2016 Nathan Storm Kaefer */
 
 
 package com.example.storm.habittracker;

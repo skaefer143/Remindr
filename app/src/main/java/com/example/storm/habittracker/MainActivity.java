@@ -10,7 +10,7 @@ so this made sense to implement.
 
 Outstanding Issues:
 
-Copyright {2016} {Nathan Storm Kaefer} */
+Copyright 2016 Nathan Storm Kaefer */
 
 package com.example.storm.habittracker;
 
