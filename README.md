@@ -6,6 +6,13 @@ Video of Working App: (October 2, 2016)
 https://youtu.be/XD42RtyMwF0
 
 
+
+Tests:
+Tests are Instrumented Unit Tests in the androidTest folder. They should be able to be run by right clicking on the class,
+and hitting run 'className'. 
+
+
+
 References/Sources Used:
 
 Beginners Book Article
