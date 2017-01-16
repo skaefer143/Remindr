@@ -23,6 +23,9 @@ Copyright 2016 Nathan Storm Kaefer */
 
 package com.example.storm.remindr;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,6 +39,7 @@ import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -96,6 +100,10 @@ public class addHabitActivity extends AppCompatActivity {
                 }
 
                 Toast.makeText(addHabitActivity.this, "Adding a Habit!", Toast.LENGTH_SHORT).show();
+
+                //set notification event, for the future, at date and time specified
+                startAlarm();
+
                 //save habit
                 Habit habit = new Habit(editNameText.getText().toString(), editDateText.getText().toString(), daysOfWeek);
                 habitListController.addHabit(habit);
@@ -243,6 +251,16 @@ public class addHabitActivity extends AppCompatActivity {
         return true;
     }
 
+    private void startAlarm() {
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        Calendar calendar =  Calendar.getInstance();
+        //calendar.set(int year, int month, int date, int hour, int minute, int second);
+        //TODO: need to add time wheel to addHabitActivity
+        long when = calendar.getTimeInMillis();         // notification time
+        Intent intent = new Intent(this, ReminderService.class);
+        PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, 0);
+        alarmManager.set(AlarmManager.RTC, when, pendingIntent);
+    }
 
 
 }
