@@ -1,4 +1,4 @@
-package com.example.storm.habittracker;
+package com.example.storm.remindr;
 
 import android.support.test.runner.AndroidJUnit4;
 

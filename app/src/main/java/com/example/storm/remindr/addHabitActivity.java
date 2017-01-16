@@ -21,7 +21,7 @@ http://www.java2s.com/Tutorial/Java/0120__Development/CheckifaStringisavaliddate
 
 Copyright 2016 Nathan Storm Kaefer */
 
-package com.example.storm.habittracker;
+package com.example.storm.remindr;
 
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;

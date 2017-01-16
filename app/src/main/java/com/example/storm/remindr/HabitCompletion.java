@@ -13,7 +13,7 @@ ListView, but we used this in lonelyTwitter, so I assumed this would work fine.
 Copyright 2016 Nathan Storm Kaefer */
 
 
-package com.example.storm.habittracker;
+package com.example.storm.remindr;
 
 import java.util.Date;
 

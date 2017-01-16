@@ -12,7 +12,7 @@ Outstanding Issues:
 
 Copyright 2016 Nathan Storm Kaefer */
 
-package com.example.storm.habittracker;
+package com.example.storm.remindr;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

@@ -26,7 +26,7 @@ http://stackoverflow.com/questions/12970296/comparing-two-calendar-objects
 
 Copyright 2016 Nathan Storm Kaefer */
 
-package com.example.storm.habittracker;
+package com.example.storm.remindr;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

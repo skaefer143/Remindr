@@ -16,10 +16,9 @@ http://stackoverflow.com/questions/3625837/android-what-is-wrong-with-openfileou
 
 Copyright 2016 Nathan Storm Kaefer */
 
-package com.example.storm.habittracker;
+package com.example.storm.remindr;
 
 import android.content.Context;
-import android.widget.ArrayAdapter;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,9 +31,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.Serializable;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 /**
  * Created by Storm on 2016-09-29.
