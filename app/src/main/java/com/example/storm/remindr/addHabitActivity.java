@@ -254,9 +254,9 @@ public class addHabitActivity extends AppCompatActivity {
     private void startAlarm() {
         AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
         Calendar calendar =  Calendar.getInstance();
-        calendar.set(int year, int month, int date, int hour, int minute, int second);
+        //calendar.set(int year, int month, int date, int hour, int minute, int second);
         //TODO: need to add time wheel to addHabitActivity
-        long when = calendar.getTimeInMillis();         // notification time
+        long when = calendar.getTimeInMillis()+2000;         // notification time
         Intent intent = new Intent(this, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, 0);
         alarmManager.set(AlarmManager.RTC, when, pendingIntent);
