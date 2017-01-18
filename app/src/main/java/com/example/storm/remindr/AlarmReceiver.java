@@ -13,24 +13,20 @@ import android.support.v4.app.NotificationCompat;
  * Created by Storm on 2017-01-17.
  */
 
-public class AlarmReceiver extends IntentService {
+public class AlarmReceiver extends BroadcastReceiver {
     //with help from http://androidideasblog.blogspot.ca/2011/07/alarmmanager-and-notificationmanager.html
     //and https://www.tutorialspoint.com/android/android_push_notification.htm
     //and http://stackoverflow.com/questions/31001784/alarmmanager-with-notification-android
 
-    public AlarmReceiver(){
-        super("AlarmReceiver");
-    }
-
     @Override
-    public void onHandleIntent(Intent intent) {
-        NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+    public void onReceive(Context context, Intent intent) {
+        NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(context, MainActivity.class);
         // The PendingIntent to launch our activity if the user selects this notification
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, notificationIntent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
         // Set the info for the views that show in the notification panel.
-        Notification.Builder builder = new Notification.Builder(getApplicationContext());
+        Notification.Builder builder = new Notification.Builder(context);
             builder.setAutoCancel(false);
             builder.setTicker("this is ticker text");
             builder.setContentTitle("WhatsApp Notification");
@@ -43,6 +39,6 @@ public class AlarmReceiver extends IntentService {
             builder.build();        // Send the notification.
 
         // We use a layout id because it is a unique number. We use it later to cancel.
-        notificationManager.notify(1, builder.getNotification());
+        notificationManager.notify(1, builder.build());
     }
 }
