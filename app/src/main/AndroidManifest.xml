@@ -22,14 +22,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".addHabitActivity" />
-        <activity android:name=".habitStatsActivity"></activity>
+        <activity android:name=".habitStatsActivity"> </activity>
 
-        <receiver android:process=":remote" android:name=".AlarmReceiver"
-            android:enabled="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
-            </intent-filter>
-        </receiver>
+        <receiver android:name="AlarmReceiver"> </receiver>
     </application>
 
 </manifest>

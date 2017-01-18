@@ -256,11 +256,13 @@ public class addHabitActivity extends AppCompatActivity {
         //TODO: need to add time wheel to addHabitActivity
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Calendar calendar =  Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.add(Calendar.SECOND, 2);
+        //set when we want the alarm to go off
         long when = calendar.getTimeInMillis();         // notification time
         Intent intent = new Intent(this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getService(addHabitActivity.this, 0, intent, 0);
-        alarmManager.set(AlarmManager.RTC, when, pendingIntent);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(addHabitActivity.this, 0, intent, 0);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, when, pendingIntent);
     }
 
 
