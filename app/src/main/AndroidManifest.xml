@@ -20,6 +20,13 @@
         </activity>
         <activity android:name=".addHabitActivity" />
         <activity android:name=".habitStatsActivity"></activity>
+
+        <receiver android:name=".AlarmReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
