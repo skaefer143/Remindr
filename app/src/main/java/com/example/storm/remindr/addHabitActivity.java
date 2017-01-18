@@ -25,6 +25,7 @@ package com.example.storm.remindr;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -252,13 +253,13 @@ public class addHabitActivity extends AppCompatActivity {
     }
 
     private void startAlarm() {
-        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        Calendar calendar =  Calendar.getInstance();
-        //calendar.set(int year, int month, int date, int hour, int minute, int second);
         //TODO: need to add time wheel to addHabitActivity
-        long when = calendar.getTimeInMillis()+2000;         // notification time
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        Calendar calendar =  Calendar.getInstance();
+        calendar.add(Calendar.SECOND, 2);
+        long when = calendar.getTimeInMillis();         // notification time
         Intent intent = new Intent(this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getService(addHabitActivity.this, 0, intent, 0);
         alarmManager.set(AlarmManager.RTC, when, pendingIntent);
     }
 
