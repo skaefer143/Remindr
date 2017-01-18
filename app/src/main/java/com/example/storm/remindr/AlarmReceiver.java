@@ -1,13 +1,11 @@
 package com.example.storm.remindr;
 
-import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
 
 /**
  * Created by Storm on 2017-01-17.
@@ -27,18 +25,14 @@ public class AlarmReceiver extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
         // Set the info for the views that show in the notification panel.
         Notification.Builder builder = new Notification.Builder(context);
-            builder.setAutoCancel(false);
-            builder.setTicker("this is ticker text");
-            builder.setContentTitle("WhatsApp Notification");
-            builder.setContentText("You have a new message");
-            builder.setSmallIcon(android.R.drawable.ic_menu_gallery);
+            builder.setAutoCancel(true);
+            builder.setContentTitle("Remindr Notification");
+            builder.setContentText("Reminder to complete activity!");
+            builder.setSmallIcon(R.color.colorPrimary);
             builder.setContentIntent(pendingIntent);
-            builder.setOngoing(true);
-            builder.setSubText("This is subtext...");   //API level 16
-            builder.setNumber(100);
-            builder.build();        // Send the notification.
+            builder.setOngoing(false);   //API level 16
 
         // We use a layout id because it is a unique number. We use it later to cancel.
-        notificationManager.notify(1, builder.build());
+        notificationManager.notify(1, builder.build()); // Send the notification.
     }
 }
