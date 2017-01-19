@@ -7,7 +7,7 @@
     android:weightSum="1">
 
     <TextView
-        android:text="Add A Habit"
+        android:text="Add a Remindr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/addHabitText"
@@ -32,7 +32,7 @@
         android:layout_alignParentEnd="true" />
 
     <TextView
-        android:text="Name of Habit:"
+        android:text="Title:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/nameText"
@@ -49,7 +49,7 @@
         android:id="@+id/editNameText"
         android:textColor="@android:color/darker_gray"
         android:gravity="center_vertical|center_horizontal"
-        android:hint="Name Here"
+        android:hint="Title Here"
         android:layout_below="@+id/nameText"
         android:layout_centerHorizontal="true"
         android:singleLine="false" />
@@ -65,27 +65,6 @@
         android:hint="yyyy-mm-dd"
         android:layout_below="@+id/dateText"
         android:layout_alignStart="@+id/editNameText" />
-
-    <TextView
-        android:text="Click on the buttons to indicate days of the week you want to do your Habit:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/daysText"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="normal|bold"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:layout_below="@+id/editDateText"
-        android:layout_alignParentStart="true" />
-
-    <CheckBox
-        android:text="Monday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkboxMonday"
-        android:layout_below="@+id/daysText"
-        android:layout_toStartOf="@+id/nameText" />
 
     <CheckBox
         android:text="Tuesday"
@@ -142,18 +121,50 @@
         android:id="@+id/dateText"
         android:textSize="24sp"
         android:textStyle="normal|bold"
-        android:paddingTop="10dp"
         android:layout_below="@+id/editNameText"
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="Reminder Time"
+        android:text="Time to be Reminded:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView2"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="normal|bold"
-        android:layout_below="@+id/checkboxSunday"
+        android:layout_alignBottom="@+id/checkboxWednesday"
         android:layout_alignStart="@+id/dateText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timeText"
+        android:textSize="30sp"
+        android:gravity="center_vertical|center_horizontal"
+        android:hint="Click to set"
+        android:layout_below="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2" />
+
+    <TextView
+        android:text="Click on the buttons to indicate days of the week you want to do your Habit:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/daysText"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:paddingBottom="10dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_below="@+id/editDateText"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:text="Monday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkboxMonday"
+        android:layout_marginEnd="12dp"
+        android:layout_below="@+id/daysText"
+        android:layout_toStartOf="@+id/checkboxSunday" />
 
 </RelativeLayout>

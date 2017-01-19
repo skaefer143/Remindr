@@ -24,6 +24,7 @@ Copyright 2016 Nathan Storm Kaefer */
 package com.example.storm.remindr;
 
 import android.app.AlarmManager;
+import android.app.DialogFragment;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +37,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -129,6 +131,16 @@ public class addHabitActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 editDateText.setTextColor(Color.BLACK);
+            }
+        });
+
+        //open time picker
+        TextView timeButton = (TextView) findViewById(R.id.timeText);
+        timeButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                // make a date fragment when clicked
+                DialogFragment frag = new TimeSelector();
+                frag.show(getFragmentManager(), "TimePicker");
             }
         });
 
