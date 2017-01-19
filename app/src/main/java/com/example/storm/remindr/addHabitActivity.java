@@ -50,8 +50,10 @@ public class addHabitActivity extends AppCompatActivity {
 
     //this date format is used to check for correct dates.
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-    boolean firstClear = false;
+    private boolean firstClear = false;
     private boolean[] daysOfWeek = new boolean[7];
+    private Date startDate;
+    private Calendar reminderTime;
     //0 is monday, 1 is tuesday, so on.
 
     TextView timeButton = (TextView) findViewById(R.id.timeText);
@@ -117,7 +119,7 @@ public class addHabitActivity extends AppCompatActivity {
 
                 //save habit
                 Habit habit = new Habit(editNameText.getText().toString(),
-                        editDateText.getText().toString(), daysOfWeek, timeButton.getText().toString());
+                        startDate, daysOfWeek, reminderTime);
                 habitListController.addHabit(habit);
                 finish();
             }
@@ -269,28 +271,37 @@ public class addHabitActivity extends AppCompatActivity {
         if(inputDate.after(currentDate)){
             return false;
         }
+        startDate = inputDate; //crucial, sets the start date to our parsed date
+        //gets passed to our habit creation
         return true;
     }
 
     private void startAlarm(String timeText, boolean[] daysOfWeek) {
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
-        Calendar calendar =  Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm a", Locale.ENGLISH);
-        try{
-            calendar.setTime(timeFormat.parse(timeText));
-        } catch (ParseException pe) {
-            System.out.println(timeText);
-            pe.printStackTrace();
-            return; //don't want to set notification if it isn't going to work anyways
+        //reminderTime gets set in isValidTime()
+        if(!isValidTime(timeText)){
+            return; //not a valid time
         }
+
         //set when we want the alarm to go off
-        long when = calendar.getTimeInMillis();         // notification time
+        long when = reminderTime.getTimeInMillis();         // notification time
         Intent intent = new Intent(this, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(addHabitActivity.this, 0, intent, 0);
         alarmManager.set(AlarmManager.RTC_WAKEUP, when, pendingIntent);
     }
 
-
+    private boolean isValidTime(String timeText){
+        reminderTime = Calendar.getInstance();
+        reminderTime.setTimeInMillis(System.currentTimeMillis());
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm a", Locale.ENGLISH);
+        try{
+            reminderTime.setTime(timeFormat.parse(timeText));
+        } catch (ParseException pe) {
+            System.out.println(timeText);
+            pe.printStackTrace();
+            return false; //don't want to set notification if it isn't going to work anyways
+        }
+        return true;
+    }
 }
