@@ -32,6 +32,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -281,6 +282,7 @@ public class addHabitActivity extends AppCompatActivity {
 
         //reminderTime gets set in isValidTime()
         if(!isValidTime(timeText)){
+            Log.i("invalid", "Invalid Time, Notification not set.");
             return; //not a valid time
         }
 
