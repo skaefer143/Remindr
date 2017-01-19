@@ -54,6 +54,7 @@ public class addHabitActivity extends AppCompatActivity {
     private boolean[] daysOfWeek = new boolean[7];
     //0 is monday, 1 is tuesday, so on.
 
+    TextView timeButton = (TextView) findViewById(R.id.timeText);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,13 +103,21 @@ public class addHabitActivity extends AppCompatActivity {
                     return;
                 }
 
+                //check the time text
+                String formattedTimeString = timeButton.getText().toString().trim();
+                if(TextUtils.isEmpty(formattedTimeString)){
+                    timeButton.setError("Please set a time to be reminded.");
+                    return;
+                }
+
                 Toast.makeText(addHabitActivity.this, "Adding a Habit!", Toast.LENGTH_SHORT).show();
 
                 //set notification event, for the future, at date and time specified
-                startAlarm();
+                startAlarm(timeButton.getText().toString(), daysOfWeek);
 
                 //save habit
-                Habit habit = new Habit(editNameText.getText().toString(), editDateText.getText().toString(), daysOfWeek);
+                Habit habit = new Habit(editNameText.getText().toString(),
+                        editDateText.getText().toString(), daysOfWeek, timeButton.getText().toString());
                 habitListController.addHabit(habit);
                 finish();
             }
@@ -135,7 +144,6 @@ public class addHabitActivity extends AppCompatActivity {
         });
 
         //open time picker
-        TextView timeButton = (TextView) findViewById(R.id.timeText);
         timeButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 // make a date fragment when clicked
@@ -264,12 +272,19 @@ public class addHabitActivity extends AppCompatActivity {
         return true;
     }
 
-    private void startAlarm() {
-        //TODO: need to add time wheel to addHabitActivity
+    private void startAlarm(String timeText, boolean[] daysOfWeek) {
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+
         Calendar calendar =  Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.add(Calendar.SECOND, 2);
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm a", Locale.ENGLISH);
+        try{
+            calendar.setTime(timeFormat.parse(timeText));
+        } catch (ParseException pe) {
+            System.out.println(timeText);
+            pe.printStackTrace();
+            return; //don't want to set notification if it isn't going to work anyways
+        }
         //set when we want the alarm to go off
         long when = calendar.getTimeInMillis();         // notification time
         Intent intent = new Intent(this, AlarmReceiver.class);

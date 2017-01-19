@@ -49,15 +49,23 @@ public class Habit {
     private int completions = 0;
     private boolean completedToday = false;
     private ArrayList<HabitCompletion> pastCompletions = new ArrayList<HabitCompletion>();
+    private Calendar reminderTime;
 
-    Habit(String nameText, String dateText, boolean[] daysOfWeek){
+    Habit(String nameText, String dateText, boolean[] daysOfWeek, String timeText){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm a", Locale.ENGLISH);
+        try{
+            this.reminderTime.setTime(timeFormat.parse(timeText));
+        } catch (ParseException pe) {
+            System.out.println(timeText);
+            pe.printStackTrace();
+        }
         this.habitName = nameText;
         this.daysOfWeek = daysOfWeek;
         try {
             this.habitDate = dateFormat.parse(dateText);
         } catch (ParseException pe) {
-            System.out.println(habitDate);
+            System.out.println(dateText);
             pe.printStackTrace();
             /*this exception should never happen, and if it does it's because we didn't
             scrub data hard enough in addHabitActivity*/
