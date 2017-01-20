@@ -160,84 +160,49 @@ public class addHabitActivity extends AppCompatActivity {
         checkboxMonday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    daysOfWeek[0] = true;
-                }
-                else{
-                    daysOfWeek[0] = false;
-                }
+                daysOfWeek[0] = isChecked;
             }
         });
         final CheckBox checkboxTuesday = (CheckBox)findViewById(R.id.checkboxTuesday);
         checkboxTuesday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    daysOfWeek[1] = true;
-                }
-                else{
-                    daysOfWeek[1] = false;
-                }
+                daysOfWeek[1] = isChecked;
             }
         });
         final CheckBox checkboxWednesday = (CheckBox)findViewById(R.id.checkboxWednesday);
         checkboxWednesday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    daysOfWeek[2] = true;
-                }
-                else{
-                    daysOfWeek[2] = false;
-                }
+                daysOfWeek[2] = isChecked;
             }
         });
         final CheckBox checkboxThursday = (CheckBox)findViewById(R.id.checkboxThursday);
         checkboxThursday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    daysOfWeek[3] = true;
-                }
-                else{
-                    daysOfWeek[3] = false;
-                }
+                daysOfWeek[3] = isChecked;
             }
         });
         final CheckBox checkboxFriday = (CheckBox)findViewById(R.id.checkboxFriday);
         checkboxFriday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    daysOfWeek[4] = true;
-                }
-                else{
-                    daysOfWeek[4] = false;
-                }
+                daysOfWeek[4] = isChecked;
             }
         });
         final CheckBox checkboxSaturday = (CheckBox)findViewById(R.id.checkboxSaturday);
         checkboxSaturday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    daysOfWeek[5] = true;
-                }
-                else{
-                    daysOfWeek[5] = false;
-                }
+                daysOfWeek[5] = isChecked;
             }
         });
         final CheckBox checkboxSunday = (CheckBox)findViewById(R.id.checkboxSunday);
         checkboxSunday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    daysOfWeek[6] = true;
-                }
-                else{
-                    daysOfWeek[6] = false;
-                }
+                daysOfWeek[6] = isChecked;
             }
         });
     }

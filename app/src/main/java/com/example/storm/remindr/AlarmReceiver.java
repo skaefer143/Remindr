@@ -20,6 +20,9 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 
+        setNextAlarm(); //set the next alarm we must fire
+
+        //TODO: build a stack to the actual habit page, instead of mainActivity?
         Intent notificationIntent = new Intent(context, MainActivity.class);
         // The PendingIntent to launch our activity if the user selects this notification
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
@@ -34,5 +37,13 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         // We use a layout id because it is a unique number. We use it later to cancel.
         notificationManager.notify(1, builder.build()); // Send the notification.
+    }
+
+    public void setNextAlarm(){
+        //TODO: make setNextAlarm()
+        //need to pull up all of our habits, and then check all their times and dates, see which
+        //one is coming next, and then set the alarm at that time
+
+
     }
 }
